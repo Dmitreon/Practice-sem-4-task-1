@@ -1,9 +1,8 @@
 package java.Util;
 
 public class IdGenerator {
-    private static int currentId = 0;
-
-    public static synchronized int generateId() {
+    private static int currentId;
+    public static int increment(){
         return ++currentId;
     }
 }

@@ -3,19 +3,21 @@ package java.creator.impl;
 import java.creator.TriangleFactory;
 import java.model.Triangle;
 import java.model.Point;
+import java.model.TriangleState;
 import java.service.TriangleValidatorService;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TriangleFactoryImpl implements TriangleFactory {
-    private final TriangleValidatorService validatorService = new TriangleValidatorService();
-
     @Override
-    public Triangle createTriangle(Point vertexA, Point vertexB, Point vertexC) {
-        if (validatorService.isValidTriangle(vertexA, vertexB, vertexC)) {
-            return new Triangle(vertexA, vertexB, vertexC);
-        } else {
-            // Здесь вы можете выбросить исключение или вернуть null, в зависимости от того, как вы хотите обрабатывать невалидные треугольники.
-            // Например:
-            throw new IllegalArgumentException("Points do not make a valid triangle.");
+    public List<Triangle> createTriangles(int[][] sides) {
+        List<Triangle> newTriangles = new ArrayList<>();
+        for (int[] current : sides) {
+            Triangle triangle = new Triangle(current[0], current[1],current[2]);
+            TriangleState currentState = TriangleState.detect(triangle);
+            //   triangle.setState(currentState);
+            newTriangles.add(triangle);
         }
+        return newTriangles;
     }
 }

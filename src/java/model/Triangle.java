@@ -7,76 +7,118 @@ import java.Util.IdGenerator;
 
 import java.util.StringJoiner;
 
-public class Triangle {
-    private final int id;
-    private Point vertexA;
-    private Point vertexB;
-    private Point vertexC;
+public class Triangle implements Observable {
+    private int triangleId;
+    private double a;
+    private double b;
+    private double c;
+    private TriangleState state = TriangleState.INVALID;
 
-    public Triangle(Point vertexA, Point vertexB, Point vertexC) {
-        this.id = IdGenerator.generateId();
-        this.vertexA = vertexA;
-        this.vertexB = vertexB;
-        this.vertexC = vertexC;
+    private TriangleObserver observer = new TriangleObserverImpl();
+
+    public Triangle(double a, double b, double c) {
+        triangleId = IdGenerator.increment();
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
 
-    public int getId() {
-        return id;
+    public int getTriangleId() {
+        return triangleId;
     }
 
-    public Point getVertexA() {
-        return vertexA;
+    public double getA() {
+        return a;
     }
 
-    public void setVertexA(Point vertexA) {
-        this.vertexA = vertexA;
+    public void setA(double a) {
+        this.a = a;
+        notifyObservers();
     }
 
-    public Point getVertexB() {
-        return vertexB;
+    public double getB() {
+        return b;
     }
 
-    public void setVertexB(Point vertexB) {
-        this.vertexB = vertexB;
+    public void setB(double b) {
+        this.b = b;
+        notifyObservers();
     }
 
-    public Point getVertexC() {
-        return vertexC;
+    public double getC() {
+        return c;
     }
 
-    public void setVertexC(Point vertexC) {
-        this.vertexC = vertexC;
+    public void setC(double c) {
+        this.c = c;
+        notifyObservers();
+    }
+
+    public TriangleState getState() {
+        return state;
+    }
+
+    public void setState(TriangleState state) {
+        if (state != null) {
+            this.state = state;
+        }
+        notifyObservers();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Triangle)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Triangle triangle = (Triangle) o;
 
-        if (id != triangle.id) return false;
-        if (!vertexA.equals(triangle.vertexA)) return false;
-        if (!vertexB.equals(triangle.vertexB)) return false;
-        return vertexC.equals(triangle.vertexC);
+        if (triangleId != triangle.triangleId) return false;
+        if (Double.compare(a, triangle.a) != 0) return false;
+        if (Double.compare(b, triangle.b) != 0) return false;
+        if (Double.compare(c, triangle.c) != 0) return false;
+        return state == triangle.state;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + vertexA.hashCode();
-        result = 31 * result + vertexB.hashCode();
-        result = 31 * result + vertexC.hashCode();
+        int result;
+        long temp;
+        result = triangleId;
+        temp = Double.doubleToLongBits(a);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(b);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(c);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + state.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "Triangle{" +
-                "id=" + id +
-                ", vertexA=" + vertexA +
-                ", vertexB=" + vertexB +
-                ", vertexC=" + vertexC +
-                '}';
+        return new StringJoiner(", ", Triangle.class.getSimpleName() + "[", "]")
+                .add("id=" + triangleId)
+                .add("a=" + a)
+                .add("b=" + b)
+                .add("c=" + c)
+                .add("state=" + state)
+                .toString();
+    }
+
+    @Override
+    public void attach() {
+        observer = new TriangleObserverImpl();
+    }
+
+    @Override
+    public void detach() {
+        observer = null;
+    }
+
+    @Override
+    public void notifyObservers() {
+        if (observer != null) {
+            observer.update(this);
+        }
     }
 }

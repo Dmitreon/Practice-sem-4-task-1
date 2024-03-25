@@ -1,4 +1,4 @@
-package java.model;
+package pattern.model;
 
 import java.util.HashMap;
 import java.util.StringJoiner;

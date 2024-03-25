@@ -1,4 +1,4 @@
-package java.observer;
+package pattern.observer;
 
 public interface Observable {
     void attach();

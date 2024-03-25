@@ -1,7 +1,7 @@
-package java.creator;
+package pattern.creator;
 
-import java.model.Triangle;
-import java.model.Point;
+import pattern.model.Triangle;
+import pattern.model.Triangle;
 
 import java.util.List;
 

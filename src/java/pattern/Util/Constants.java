@@ -1,5 +1,4 @@
-package java.Util;
-
+package pattern.Util;
 public class Constants {
     //todo
 }

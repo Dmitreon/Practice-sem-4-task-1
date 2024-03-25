@@ -1,9 +1,10 @@
-package java.model;
+package pattern.model;
 
-import java.observer.Observable;
-import java.observer.TriangleObserver;
-import java.observer.impl.TriangleObserverImpl;
-import java.Util.IdGenerator;
+import pattern.observer.Observable;
+import pattern.observer.TriangleObserver;
+import pattern.observer.impl.TriangleObserverImpl;
+import pattern.Util.IdGenerator;
+import pattern.service.TriangleService;
 
 import java.util.StringJoiner;
 
@@ -107,7 +108,7 @@ public class Triangle implements Observable {
 
     @Override
     public void attach() {
-        observer = new TriangleObserverImpl();
+        this.observer = new TriangleObserverImpl(new TriangleService());
     }
 
     @Override

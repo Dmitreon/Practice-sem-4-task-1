@@ -1,7 +1,6 @@
-package java.service;
+package pattern.service;
 
-import java.model.Point;
-import java.model.Triangle;
+import pattern.model.Point;
 
 public class TriangleValidatorService {
 

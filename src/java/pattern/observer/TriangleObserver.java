@@ -1,6 +1,6 @@
-package java.observer;
+package pattern.observer;
 
-import java.model.Triangle;
+import pattern.model.Triangle;
 
 
 public interface TriangleObserver {

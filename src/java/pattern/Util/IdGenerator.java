@@ -1,4 +1,4 @@
-package java.Util;
+package pattern.Util;
 
 public class IdGenerator {
     private static int currentId;

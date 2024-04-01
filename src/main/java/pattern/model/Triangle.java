@@ -14,15 +14,21 @@ public class Triangle implements Observable {
     private double b;
     private double c;
     private TriangleState state = TriangleState.INVALID;
+    private TriangleObserver observer;
 
-    private TriangleObserver observer = new TriangleObserverImpl();
-
-    public Triangle(double a, double b, double c) {
+    public Triangle(Point p1, Point p2, Point p3) {
         triangleId = IdGenerator.increment();
-        this.a = a;
-        this.b = b;
-        this.c = c;
+        this.a = p1.distanceTo(p2);
+        this.b = p2.distanceTo(p3);
+        this.c = p3.distanceTo(p1);
+        this.observer = new TriangleObserverImpl(new TriangleService());
+        attach();
+        notifyObservers();
     }
+
+//    private double round(double value) {
+//        return new BigDecimal(value).setScale(0, RoundingMode.HALF_UP).doubleValue();
+//    }
 
     public int getTriangleId() {
         return triangleId;
@@ -60,11 +66,12 @@ public class Triangle implements Observable {
     }
 
     public void setState(TriangleState state) {
-        if (state != null) {
+        if (state != null && this.state != state) {
             this.state = state;
+            notifyObservers();
         }
-        notifyObservers();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -106,7 +113,6 @@ public class Triangle implements Observable {
                 .toString();
     }
 
-    @Override
     public void attach() {
         this.observer = new TriangleObserverImpl(new TriangleService());
     }
@@ -120,6 +126,11 @@ public class Triangle implements Observable {
     public void notifyObservers() {
         if (observer != null) {
             observer.update(this);
+        }
+    }
+    public void setStateWithoutNotify(TriangleState state) {
+        if (state != null && this.state != state) {
+            this.state = state;
         }
     }
 }

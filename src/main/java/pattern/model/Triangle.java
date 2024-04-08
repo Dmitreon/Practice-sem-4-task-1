@@ -8,6 +8,9 @@ import pattern.service.TriangleService;
 
 import java.util.StringJoiner;
 
+/**
+ Класс, представляющий треугольник и реализующий интерфейс Observable для уведомления об изменениях
+ */
 public class Triangle implements Observable {
     private int triangleId;
     private double a;
@@ -22,8 +25,8 @@ public class Triangle implements Observable {
         this.b = p2.distanceTo(p3);
         this.c = p3.distanceTo(p1);
         this.observer = new TriangleObserverImpl(new TriangleService());
-        attach();
-        notifyObservers();
+        attach();// Подписываем наблюдателя
+        notifyObservers();// Уведомляем наблюдателя о создании треугольник
     }
 
 //    private double round(double value) {
@@ -112,22 +115,34 @@ public class Triangle implements Observable {
                 .add("state=" + state)
                 .toString();
     }
-
+    /**
+     Регистрирует наблюдателя
+     */
     public void attach() {
         this.observer = new TriangleObserverImpl(new TriangleService());
     }
 
+    /**
+     Отменяет регистрацию наблюдателя
+     */
     @Override
     public void detach() {
         observer = null;
     }
 
+    /**
+     Уведомляет наблюдателя о изменениях
+     */
     @Override
     public void notifyObservers() {
         if (observer != null) {
             observer.update(this);
         }
     }
+
+    /**
+     Изменяет состояние треугольника без уведомления наблюдателя
+     */
     public void setStateWithoutNotify(TriangleState state) {
         if (state != null && this.state != state) {
             this.state = state;

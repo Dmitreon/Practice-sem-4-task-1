@@ -1,8 +1,4 @@
-package pattern.model;
-
-/**
- Возможные состояния треугольника
- */
+package pattern.ehu.task1.model;
 
 public enum TriangleState {
     INVALID, // Треугольник не существует

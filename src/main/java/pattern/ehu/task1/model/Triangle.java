@@ -1,16 +1,13 @@
-package pattern.model;
+package pattern.ehu.task1.model;
 
-import pattern.observer.Observable;
-import pattern.observer.TriangleObserver;
-import pattern.observer.impl.TriangleObserverImpl;
-import pattern.Util.IdGenerator;
-import pattern.service.TriangleService;
+import pattern.ehu.task1.observer.Observable;
+import pattern.ehu.task1.observer.TriangleObserver;
+import pattern.ehu.task1.observer.impl.TriangleObserverImpl;
+import pattern.ehu.task1.util.IdGenerator;
+import pattern.ehu.task1.service.TriangleService;
 
 import java.util.StringJoiner;
 
-/**
- Класс, представляющий треугольник и реализующий интерфейс Observable для уведомления об изменениях
- */
 public class Triangle implements Observable {
     private int triangleId;
     private double a;
@@ -24,14 +21,12 @@ public class Triangle implements Observable {
         this.a = p1.distanceTo(p2);
         this.b = p2.distanceTo(p3);
         this.c = p3.distanceTo(p1);
+        this.state = TriangleState.INVALID;
+        setState(TriangleState.detect(this));
         this.observer = new TriangleObserverImpl(new TriangleService());
-        attach();// Подписываем наблюдателя
-        notifyObservers();// Уведомляем наблюдателя о создании треугольник
+        attach();
+        notifyObservers();
     }
-
-//    private double round(double value) {
-//        return new BigDecimal(value).setScale(0, RoundingMode.HALF_UP).doubleValue();
-//    }
 
     public int getTriangleId() {
         return triangleId;
@@ -74,8 +69,6 @@ public class Triangle implements Observable {
             notifyObservers();
         }
     }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,7 +82,6 @@ public class Triangle implements Observable {
         if (Double.compare(c, triangle.c) != 0) return false;
         return state == triangle.state;
     }
-
     @Override
     public int hashCode() {
         int result;
@@ -104,7 +96,6 @@ public class Triangle implements Observable {
         result = 31 * result + state.hashCode();
         return result;
     }
-
     @Override
     public String toString() {
         return new StringJoiner(", ", Triangle.class.getSimpleName() + "[", "]")
@@ -115,37 +106,20 @@ public class Triangle implements Observable {
                 .add("state=" + state)
                 .toString();
     }
-    /**
-     Регистрирует наблюдателя
-     */
+
     public void attach() {
         this.observer = new TriangleObserverImpl(new TriangleService());
     }
 
-    /**
-     Отменяет регистрацию наблюдателя
-     */
     @Override
     public void detach() {
         observer = null;
     }
 
-    /**
-     Уведомляет наблюдателя о изменениях
-     */
     @Override
     public void notifyObservers() {
         if (observer != null) {
             observer.update(this);
-        }
-    }
-
-    /**
-     Изменяет состояние треугольника без уведомления наблюдателя
-     */
-    public void setStateWithoutNotify(TriangleState state) {
-        if (state != null && this.state != state) {
-            this.state = state;
         }
     }
 }

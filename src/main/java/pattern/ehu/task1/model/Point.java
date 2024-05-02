@@ -1,11 +1,8 @@
-package pattern.model;
+package pattern.ehu.task1.model;
 
-/**
- Класс представляющий точку в 2D пространстве.
- */
 public class Point {
-    private final double x; // Координата X точки
-    private final double y; // Координата Y точки
+    private final double x;
+    private final double y;
 
     public Point(double x, double y) {
         this.x = x;
@@ -20,17 +17,11 @@ public class Point {
         return y;
     }
 
-    /**
-     Вычисляет расстояние от этой точки до другой, округленное до двух знаков после запятой
-     */
     public double distanceTo(Point other) {
         double distance = Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
         return roundToTwoDecimals(distance);
     }
 
-    /**
-     Переопределение метода toString для представления точки в текстовом формате
-     */
     @Override
     public String toString() {
         return "Point{" + "x=" + x + ", y=" + y + '}';
@@ -54,9 +45,7 @@ public class Point {
         return result;
     }
 
-    /**
-     Метод для округления значения до двух знаков после запятой
-     */
+
     public static double roundToTwoDecimals(double value) {
         return Math.round(value * 100.0) / 100.0;
     }

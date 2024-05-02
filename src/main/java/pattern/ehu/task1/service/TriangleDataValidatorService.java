@@ -1,6 +1,6 @@
-package pattern.service;
+package pattern.ehu.task1.service;
 
-import pattern.exception.InvalidTriangleFormatException;
+import pattern.ehu.task1.exception.InvalidTriangleFormatException;
 
 public class TriangleDataValidatorService {
 

@@ -2,7 +2,7 @@ package pattern.ehu.task1.filehandling.impl;
 
 import pattern.ehu.task1.creator.TriangleFactory;
 import pattern.ehu.task1.exception.InvalidTriangleFormatException;
-import pattern.ehu.task1.filehandling.FileParser;
+import pattern.ehu.task1.filehandling.TriangleFileParser;
 import pattern.ehu.task1.model.Point;
 import pattern.ehu.task1.model.Triangle;
 import pattern.ehu.task1.service.TriangleDataValidatorService;
@@ -18,15 +18,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FileParserImpl implements FileParser {
+public class TriangleFileParserImpl implements TriangleFileParser {
     private static final String DEFAULT_FILENAME = "triangles.txt";
     private static final String LINE_DELIMITER = ";\\s*";
     private static final String COORDINATE_DELIMITER = ",";
     private static final int POINTS_PER_TRIANGLE = 3;
     private final TriangleFactory triangleFactory;
-    private static final Logger LOGGER = Logger.getLogger(FileParserImpl.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TriangleFileParserImpl.class.getName());
 
-    public FileParserImpl(TriangleFactory triangleFactory) {
+    public TriangleFileParserImpl(TriangleFactory triangleFactory) {
         this.triangleFactory = triangleFactory;
     }
 

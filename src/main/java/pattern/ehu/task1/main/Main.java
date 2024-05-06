@@ -1,7 +1,7 @@
 package pattern.ehu.task1.main;
 
 import pattern.ehu.task1.creator.impl.TriangleFactoryImpl;
-import pattern.ehu.task1.filehandling.impl.FileParserImpl;
+import pattern.ehu.task1.filehandling.impl.TriangleFileParserImpl;
 import pattern.ehu.task1.model.Triangle;
 import pattern.ehu.task1.model.Warehouse;
 import pattern.ehu.task1.model.Point;
@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         TriangleFactoryImpl triangleFactory = new TriangleFactoryImpl();
 
-        FileParserImpl parser = new FileParserImpl(triangleFactory);
+        TriangleFileParserImpl parser = new TriangleFileParserImpl(triangleFactory);
 
         try {
             List<Triangle> trianglesFromFile = parser.parseTrianglesFromFile();

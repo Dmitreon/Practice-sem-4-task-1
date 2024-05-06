@@ -1,8 +1,0 @@
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 1 updated in Warehouse
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 2 updated in Warehouse
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 3 updated in Warehouse
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 4 updated in Warehouse
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 5 updated in Warehouse
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 6 updated in Warehouse
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Triangle state changed to INVALID
-2024-05-02 16:16:36 [main] INFO  pattern.ehu.task1.observer.impl.TriangleObserverImpl - Perimeter for triangle ID 6 updated in Warehouse

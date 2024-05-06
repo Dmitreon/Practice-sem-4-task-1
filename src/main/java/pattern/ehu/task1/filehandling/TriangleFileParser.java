@@ -6,7 +6,7 @@ import pattern.ehu.task1.model.Triangle;
 import java.io.IOException;
 import java.util.List;
 
-public interface FileParser {
+public interface TriangleFileParser {
     List<Triangle> parseTrianglesFromFile() throws IOException;
     void processLine(List<Triangle> triangles, String line) throws InvalidTriangleFormatException;
 }
